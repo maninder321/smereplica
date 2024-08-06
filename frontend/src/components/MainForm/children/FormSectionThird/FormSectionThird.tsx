@@ -20,9 +20,9 @@ function FormSectionThird() {
           </span>
           <div>
             PDFs (not scanned copies) of company's operating bank current
-            account(s) statements for the past 6 months. Example: If today is 06
-            Aug 24, then please upload bank statements from Feb 24 to Jul 24
-            (both months inclusive)
+            account(s) statements for the past 6 months. <br />
+            Example: If today is 06 Aug 24, then please upload bank statements
+            from Feb 24 to Jul 24 (both months inclusive)
           </div>
         </div>
 

@@ -1,7 +1,13 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
+  width: calc(95% - 44px);
+  margin-top: 25px;
+  margin-left: 22px;
+  padding-left: 22px;
+  padding-bottom: 25px;
+  border-left: 1px solid #bdbdbd;
   justify-content: space-between;
-  width: 90%;
 }
 
 .fileUploadBox {
@@ -35,12 +41,14 @@
 .information {
   flex-shrink: 0;
   font-size: 16px;
-  width: 400px;
+  width: 500px;
   color: RGBA(0, 0, 0, 0.6);
 }
 
 .singleInformation {
   display: flex;
+  margin-bottom: 25px;
+  line-height: 1.5;
   /* align-items: center; */
   /* justify-content: center; */
 }

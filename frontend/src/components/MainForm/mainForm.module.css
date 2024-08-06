@@ -1,7 +1,7 @@
 .mainFormContainer {
   background-color: white;
   width: 1153px;
-  height: 100vh;
+  height: 100%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 15px;
   display: flex;
   align-items: center;

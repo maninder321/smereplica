@@ -1,9 +1,10 @@
 import { TextField } from "@mui/material";
 import React from "react";
+import styles from "./formSectionOne.module.css";
 
 function FormSectionOne() {
   return (
-    <div>
+    <div className={styles.container}>
       <TextField
         id="outlined-basic"
         label="Company UEN"

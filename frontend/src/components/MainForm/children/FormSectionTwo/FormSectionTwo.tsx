@@ -1,20 +1,21 @@
 import { TextField } from "@mui/material";
 import React from "react";
+import styles from "./formSectionTwo.module.css";
 
 function FormSectionTwo() {
   return (
-    <div>
+    <div className={styles.container}>
       <TextField
         id="outlined-basic"
         label="Full Name"
         variant="outlined"
-        style={{ width: "492px" }}
+        style={{ width: "492px", marginBottom: "25px" }}
       />
       <TextField
         id="outlined-basic"
         label="Position With Company"
         variant="outlined"
-        style={{ width: "492px" }}
+        style={{ width: "492px", marginBottom: "25px" }}
       />
       <TextField
         id="outlined-basic"
@@ -26,13 +27,13 @@ function FormSectionTwo() {
             color: "#601a79",
           },
         }}
-        style={{ width: "492px" }}
+        style={{ width: "492px", marginBottom: "25px" }}
       />
       <TextField
         id="outlined-basic"
         label="Re-enter Email Address"
         variant="outlined"
-        style={{ width: "492px" }}
+        style={{ width: "492px", marginBottom: "25px" }}
       />
       <TextField
         id="outlined-basic"

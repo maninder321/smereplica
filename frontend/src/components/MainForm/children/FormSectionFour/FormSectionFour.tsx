@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./formSectionFour.module.css";
+import { Button, Checkbox } from "@mui/material";
 
 function FormSectionFour() {
   return (
     <div className={styles.container}>
-      <div>
-        <input type="checkbox" />
+      <div className={styles.termsCheck}>
+        <Checkbox />
         By ticking, you are confirming that you have understood and are agreeing
         to the details mentioned:
       </div>
@@ -51,6 +52,11 @@ function FormSectionFour() {
           </span>
           <div>I have read and understand the Terms & Conditions</div>
         </div>
+      </div>
+      <div className={styles.submitButton}>
+        <Button variant="contained" disabled>
+          Submit
+        </Button>
       </div>
     </div>
   );
