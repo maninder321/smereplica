@@ -1,0 +1,18 @@
+.container {
+  color: RGBA(0, 0, 0, 0.6);
+}
+
+.singleInformation {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.information {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.singleInformation > span {
+  padding-right: 10px;
+}
