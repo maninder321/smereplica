@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import styles from "./formSectionTwo.module.css";
 
@@ -40,6 +40,11 @@ function FormSectionTwo() {
         label="Mobile Number"
         variant="outlined"
         style={{ width: "492px" }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">🇸🇬 +65</InputAdornment>
+          ),
+        }}
       />
     </div>
   );
