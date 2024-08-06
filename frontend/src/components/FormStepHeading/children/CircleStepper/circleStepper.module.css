@@ -1,0 +1,23 @@
+.circle {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+.notCompleted {
+  background-color: red;
+}
+
+.completed {
+  background-color: green;
+}
+
+.idle {
+  background-color: gray;
+}
