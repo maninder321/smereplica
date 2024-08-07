@@ -6,9 +6,9 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileUploadService } from './file-upload.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { FileUploadService } from 'src/services/file-upload.service';
 
 @Controller('file-upload')
 export class FileUploadController {
@@ -44,13 +44,6 @@ export class FileUploadController {
     if (!file) {
       return new BadRequestException('File Not Uploaded');
     }
-    return {
-      error: false,
-      message: 'File Uploaded',
-      data: {
-        id: Date.now(),
-        fileName: file.filename,
-      },
-    };
+    return this.fileUploadService.addUploadedFile(file);
   }
 }
