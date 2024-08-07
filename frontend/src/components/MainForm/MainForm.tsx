@@ -94,6 +94,7 @@ function MainForm() {
           formCompletionStatusRef.current.sectionTwo = true;
           activateNextStep();
         }}
+        activate={sectionTwo === "idle" ? false : true}
       />
       <FormStepHeading
         state={sectionThree}

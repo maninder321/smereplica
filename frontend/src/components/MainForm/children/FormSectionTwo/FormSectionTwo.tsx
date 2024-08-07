@@ -8,6 +8,7 @@ import useFormSectionTwo from "./hooks/useFormSectionTwo";
 function FormSectionTwo(props: {
   formCompletedCallback: () => void;
   formNotCompletedCallback: () => void;
+  activate: boolean;
 }) {
   const {
     fullName,
@@ -48,6 +49,7 @@ function FormSectionTwo(props: {
               : "Full Name is required"
             : ""
         }
+        disabled={!props.activate}
       />
       <TextField
         id="outlined-basic"
@@ -70,6 +72,7 @@ function FormSectionTwo(props: {
               : "Position is required"
             : ""
         }
+        disabled={!props.activate}
       />
       <div style={{ display: "flex", flexDirection: "column" }}>
         <TextField
@@ -95,6 +98,7 @@ function FormSectionTwo(props: {
               ? emailAddress.errorMessage
               : ""
           }
+          disabled={!props.activate}
         />
         <span
           style={{ color: "#601a79", fontSize: "12px", marginBottom: "25px" }}
@@ -121,6 +125,7 @@ function FormSectionTwo(props: {
             ? reEnterEmailAddress.errorMessage
             : ""
         }
+        disabled={!props.activate}
       />
       <TextField
         id="outlined-basic"
@@ -141,6 +146,7 @@ function FormSectionTwo(props: {
             ? "Enter a 8-digit Mobile Number"
             : ""
         }
+        disabled={!props.activate}
       />
     </div>
   );
