@@ -10,8 +10,14 @@ function FormSectionOne(props: {
   formCompletedCallback: () => {};
   formNotCompletedCallback: () => {};
 }) {
-  const { companyName, companyUEN, setCompanyName, setCompanyUEN } =
-    useFormSectionOne();
+  const {
+    companyName,
+    companyUEN,
+    onChangeCompanyUEN,
+    onBlurCompanyUEN,
+    onChangeCompanyName,
+    onBlurCompanyName,
+  } = useFormSectionOne();
 
   return (
     <div className={styles.container}>
@@ -20,48 +26,32 @@ function FormSectionOne(props: {
         label="Company UEN"
         variant="outlined"
         style={{ width: "492px" }}
-        onChange={(e) => {
-          setCompanyUEN((prev) => {
-            return {
-              ...prev,
-              data: e.target.value,
-            };
-          });
-        }}
-        onBlur={() => {
-          setCompanyUEN((prev) => {
-            return {
-              ...prev,
-              canShowError: true,
-            };
-          });
-        }}
+        onChange={(e) => onChangeCompanyUEN(e)}
+        onBlur={() => onBlurCompanyUEN()}
+        value={companyUEN.data}
         error={companyUEN.canShowError ? !companyUEN.completed : false}
-        helperText={companyUEN.canShowError ? "Company UEN is required" : ""}
+        helperText={
+          companyUEN.canShowError && !companyUEN.completed
+            ? "Company UEN is required"
+            : ""
+        }
       />
       <TextField
         id="outlined-basic"
         label="Company Name"
         variant="outlined"
         style={{ width: "492px" }}
-        onChange={(e) =>
-          setCompanyName((prev) => {
-            return {
-              ...prev,
-              data: e.target.value,
-            };
-          })
-        }
-        onBlur={() => {
-          setCompanyName((prev) => {
-            return {
-              ...prev,
-              canShowError: true,
-            };
-          });
-        }}
+        onChange={(e) => onChangeCompanyName(e)}
+        onBlur={() => onBlurCompanyName()}
+        value={companyName.data}
         error={companyName.canShowError ? !companyName.completed : false}
-        helperText={companyName.canShowError ? "Company Name is required" : ""}
+        helperText={
+          companyName.canShowError && !companyName.completed
+            ? companyName.data.length > 0 && companyName.data.length < 2
+              ? "Minimum 2 characters required"
+              : "Company Name is required"
+            : ""
+        }
       />
     </div>
   );
