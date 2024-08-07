@@ -9,84 +9,100 @@ import styles from "./mainForm.module.css";
 import HeadingForm from "../FormStepHeading/children/HeadingForm/HeadingForm";
 import FormStepHeading from "../FormStepHeading/FormStepHeading";
 import { Button } from "@mui/material";
-
-type MainFormCompletion = {
-  sectionOne: "notCompleted" | "completed" | "idle";
-  sectionTwo: "notCompleted" | "completed" | "idle";
-  sectionThree: "notCompleted" | "completed" | "idle";
-  sectionFour: "notCompleted" | "completed" | "idle";
-};
+import useMainForm from "./hooks/useMainForm";
 
 function MainForm() {
-  const [completionState, setCompletionState] = useState<MainFormCompletion>({
-    sectionOne: "notCompleted",
-    sectionTwo: "idle",
-    sectionThree: "idle",
-    sectionFour: "idle",
-  });
+  const {
+    sectionOne,
+    sectionTwo,
+    sectionThree,
+    sectionFour,
+    setSectionOne,
+    setSectionTwo,
+    setSectionThree,
+    setSectionFour,
+    formCompletionStatus,
+    setFormCompletionStatus,
+    activateNextStep,
+    formCompletionStatusRef,
+  } = useMainForm();
 
   return (
     <div className={styles.mainFormContainer}>
       <FormStepHeading
-        state={completionState.sectionOne}
+        state={sectionOne}
         title="Contact Information"
         stepNumber={1}
       />
       <FormSectionOne
         formNotCompletedCallback={() => {
-          setCompletionState((prev) => {
+          if (formCompletionStatus.sectionOne) {
+            setSectionOne("notCompleted");
+            setSectionTwo("idle");
+            setSectionThree("idle");
+            setSectionFour("idle");
+          }
+          setFormCompletionStatus((prev) => {
             return {
               ...prev,
-              sectionOne: "notCompleted",
-              sectionTwo: "idle",
-              sectionThree: "idle",
-              sectionFour: "idle",
+              sectionOne: false,
             };
           });
+          formCompletionStatusRef.current.sectionOne = false;
         }}
         formCompletedCallback={() => {
-          setCompletionState((prev) => {
+          setFormCompletionStatus((prev) => {
             return {
               ...prev,
-              sectionOne: "completed",
+              sectionOne: true,
             };
           });
+          // setSectionTwo("notCompleted");
+          formCompletionStatusRef.current.sectionOne = true;
+          activateNextStep();
         }}
       />
       <FormStepHeading
-        state={completionState.sectionTwo}
+        state={sectionTwo}
         title="Applicant Information"
         stepNumber={2}
       />
       <FormSectionTwo
         formNotCompletedCallback={() => {
-          setCompletionState((prev) => {
+          if (formCompletionStatus.sectionTwo) {
+            setSectionOne("completed");
+            setSectionTwo("notCompleted");
+            setSectionThree("idle");
+            setSectionFour("idle");
+          }
+          setFormCompletionStatus((prev) => {
             return {
               ...prev,
-              sectionOne: "notCompleted",
-              sectionTwo: "idle",
-              sectionThree: "idle",
-              sectionFour: "idle",
+              sectionTwo: false,
             };
           });
+          formCompletionStatusRef.current.sectionTwo = false;
         }}
         formCompletedCallback={() => {
-          setCompletionState((prev) => {
+          setFormCompletionStatus((prev) => {
             return {
               ...prev,
-              sectionOne: "completed",
+              sectionTwo: true,
             };
           });
+          // setSectionThree("notCompleted");
+          formCompletionStatusRef.current.sectionTwo = true;
+          activateNextStep();
         }}
       />
       <FormStepHeading
-        state={completionState.sectionThree}
+        state={sectionThree}
         title="Upload Documents"
         stepNumber={3}
       />
       <FormSectionThird />
       <FormStepHeading
-        state={completionState.sectionFour}
+        state={sectionFour}
         title="Terms & Conditions"
         stepNumber={4}
       />

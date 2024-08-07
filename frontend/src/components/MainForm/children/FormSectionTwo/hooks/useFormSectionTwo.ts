@@ -53,7 +53,6 @@ function useFormSectionTwo({
 
   useEffect(() => {
     validateReEnterEmailAddress(reEnterEmailAddress.data);
-    console.log("HIi");
   }, [emailAddress.data]);
 
   const formCompletedHandler = useCallback(() => {
