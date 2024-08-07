@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./formSectionThird.module.css";
+import { useDropzone } from "react-dropzone";
+import SingleFileUploader from "./children/SingleFileUploader/SingleFileUploader";
+import SpinnerLoader from "@/components/SpinnerLoader/SpinnerLoader";
 
 function FormSectionThird() {
+  const onDrop = useCallback((acceptedFiles: any) => {
+    setFiles(acceptedFiles);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const [files, setFiles] = useState([]);
+
   return (
     <div className={styles.container}>
-      <div className={styles.fileUploadBox}>
+      <div className={styles.fileUploadBox} {...getRootProps()}>
+        <input {...getInputProps()} />
         <div className={styles.fileUploadButton}>
           <i className="fa-solid fa-file-arrow-up"></i>
         </div>
@@ -56,6 +66,11 @@ function FormSectionThird() {
           </div>
         </div>
       </div>
+      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
+      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
+      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
+      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
+      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
     </div>
   );
 }

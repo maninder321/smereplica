@@ -1,0 +1,28 @@
+.container {
+  height: 45px;
+  min-width: 500px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 22.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 15px;
+}
+
+.greenBorder {
+  border-color: green;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.redBorder {
+  border-color: red;
+}

@@ -11,6 +11,7 @@
 }
 
 .fileUploadBox {
+  cursor: pointer;
   width: 506px;
   height: 157px;
   background-color: #fafafa;
@@ -34,8 +35,13 @@
   margin-bottom: 15px;
 }
 
+.fileUploadButton > i {
+  color: #101059;
+}
+
 .fileUploadText {
-  color: #bdbdbd;
+  /* color: #bdbdbd; */
+  color: #101059;
 }
 
 .information {
