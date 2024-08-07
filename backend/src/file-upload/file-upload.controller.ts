@@ -48,6 +48,7 @@ export class FileUploadController {
       error: false,
       message: 'File Uploaded',
       data: {
+        id: Date.now(),
         fileName: file.filename,
       },
     };

@@ -3,16 +3,28 @@ import styles from "./formSectionThird.module.css";
 import { useDropzone } from "react-dropzone";
 import SingleFileUploader from "./children/SingleFileUploader/SingleFileUploader";
 import SpinnerLoader from "@/components/SpinnerLoader/SpinnerLoader";
+import useFormSectionThird from "./hooks/useFormSectionThird";
 
-function FormSectionThird() {
-  const onDrop = useCallback((acceptedFiles: any) => {
-    setFiles(acceptedFiles);
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-  const [files, setFiles] = useState([]);
+function FormSectionThird(props: { disable: boolean }) {
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    files,
+    setFiles,
+    removeFileHandler,
+    uploadedFiles,
+    addUploadedFile,
+  } = useFormSectionThird();
+
+  console.log(uploadedFiles);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={
+        styles.container + ` ${props.disable ? styles.disableFileUpload : ""}`
+      }
+    >
       <div className={styles.fileUploadBox} {...getRootProps()}>
         <input {...getInputProps()} />
         <div className={styles.fileUploadButton}>
@@ -66,11 +78,19 @@ function FormSectionThird() {
           </div>
         </div>
       </div>
-      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
-      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
-      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
-      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
-      <SingleFileUploader fileName="ABC" uploadStatus="uploaded" />
+      {files.map((file: any, index) => {
+        return (
+          <SingleFileUploader
+            key={index}
+            identifier={index + ""}
+            fileName={file.name}
+            uploadStatus={file.status}
+            onFileRemove={removeFileHandler}
+            file={file}
+            onFileUploaded={addUploadedFile}
+          />
+        );
+      })}
     </div>
   );
 }

@@ -24,6 +24,18 @@
   flex-shrink: 0;
 }
 
+.disableFileUpload {
+  pointer-events: none;
+}
+
+.disableFileUpload .fileUploadText {
+  color: #bdbdbd !important;
+}
+
+.disableFileUpload .fileUploadButton > i {
+  color: #bdbdbd !important;
+}
+
 .fileUploadButton {
   background-color: #dcdce6;
   width: 40px;
@@ -40,7 +52,7 @@
 }
 
 .fileUploadText {
-  /* color: #bdbdbd; */
+  color: #bdbdbd;
   color: #101059;
 }
 
