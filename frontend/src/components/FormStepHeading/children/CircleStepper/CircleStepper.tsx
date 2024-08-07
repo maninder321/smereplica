@@ -18,7 +18,11 @@ function CircleStepper(props: {
         }`
       }
     >
-      {props.stepNumber}
+      {props.state === "completed" ? (
+        <i className="fa-solid fa-check"></i>
+      ) : (
+        props.stepNumber
+      )}
     </div>
   );
 }

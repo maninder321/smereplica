@@ -32,7 +32,27 @@ function MainForm() {
         title="Contact Information"
         stepNumber={1}
       />
-      <FormSectionOne />
+      <FormSectionOne
+        formNotCompletedCallback={() => {
+          setCompletionState((prev) => {
+            return {
+              ...prev,
+              sectionOne: "notCompleted",
+              sectionTwo: "idle",
+              sectionThree: "idle",
+              sectionFour: "idle",
+            };
+          });
+        }}
+        formCompletedCallback={() => {
+          setCompletionState((prev) => {
+            return {
+              ...prev,
+              sectionOne: "completed",
+            };
+          });
+        }}
+      />
       <FormStepHeading
         state={completionState.sectionTwo}
         title="Applicant Information"

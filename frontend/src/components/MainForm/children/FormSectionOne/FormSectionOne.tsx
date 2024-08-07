@@ -3,12 +3,11 @@
 import { TextField } from "@mui/material";
 import React, { useState } from "react";
 import styles from "./formSectionOne.module.css";
-import { FormElementType } from "../../FormElementType";
 import useFormSectionOne from "./hooks/useFormSectionOne";
 
 function FormSectionOne(props: {
-  formCompletedCallback: () => {};
-  formNotCompletedCallback: () => {};
+  formCompletedCallback: () => void;
+  formNotCompletedCallback: () => void;
 }) {
   const {
     companyName,
@@ -17,7 +16,10 @@ function FormSectionOne(props: {
     onBlurCompanyUEN,
     onChangeCompanyName,
     onBlurCompanyName,
-  } = useFormSectionOne();
+  } = useFormSectionOne({
+    formCompletedCallback: props.formCompletedCallback,
+    formNotCompletedCallback: props.formNotCompletedCallback,
+  });
 
   return (
     <div className={styles.container}>
