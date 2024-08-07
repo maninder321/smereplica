@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { CreateSmeDetailsDto } from 'src/dtos/create-sme-details.dto';
 import { SmeDetailService } from 'src/services/sme-details.service';
 
@@ -21,5 +21,15 @@ export class SmeController {
     };
     console.log(createSmeDetailsDto);
     return this.smeDetailsService.create(createSmeDetailsDto);
+  }
+
+  @Get('/getAll')
+  async getAll() {
+    let details = await this.smeDetailsService.findAllSortedByCreatedAt('ASC');
+    return {
+      error: false,
+      message: 'Fetched Data',
+      data: details,
+    };
   }
 }

@@ -16,13 +16,13 @@ export class SmeDetailService {
     return this.smeRepository.save(attachment);
   }
 
-  findAll(): Promise<SmeDetail[]> {
-    return this.smeRepository.find();
-  }
-  findOne(id: number): Promise<SmeDetail | null> {
-    return this.smeRepository.findOneBy({ id });
-  }
-  async remove(id: number): Promise<void> {
-    await this.smeRepository.delete(id);
+  async findAllSortedByCreatedAt(
+    order: 'ASC' | 'DESC' = 'ASC',
+  ): Promise<SmeDetail[]> {
+    return this.smeRepository.find({
+      order: {
+        createdAt: order,
+      },
+    });
   }
 }
