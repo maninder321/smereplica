@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 function useFormSectionThird() {
@@ -20,6 +20,7 @@ function useFormSectionThird() {
     maxFiles: 6,
   });
   const [files, setFiles] = useState([]);
+  const filesRef = useRef(files);
 
   const removeFileHandler = useCallback((index: string) => {
     setFiles((prev) => {
@@ -50,6 +51,7 @@ function useFormSectionThird() {
     uploadedFiles,
     setUploadedFiles,
     addUploadedFile,
+    filesRef,
   };
 }
 

@@ -101,7 +101,7 @@ function MainForm() {
         title="Upload Documents"
         stepNumber={3}
       />
-      <FormSectionThird disable={false} />
+      <FormSectionThird disable={sectionThree === "idle" ? true : false} />
       <FormStepHeading
         state={sectionFour}
         title="Terms & Conditions"

@@ -5,7 +5,11 @@ import SingleFileUploader from "./children/SingleFileUploader/SingleFileUploader
 import SpinnerLoader from "@/components/SpinnerLoader/SpinnerLoader";
 import useFormSectionThird from "./hooks/useFormSectionThird";
 
-function FormSectionThird(props: { disable: boolean }) {
+function FormSectionThird(props: {
+  disable: boolean;
+  formCompletedCallback: () => void;
+  formNotCompletedCallback: () => void;
+}) {
   const {
     getRootProps,
     getInputProps,
@@ -15,9 +19,10 @@ function FormSectionThird(props: { disable: boolean }) {
     removeFileHandler,
     uploadedFiles,
     addUploadedFile,
+    filesRef,
   } = useFormSectionThird();
 
-  console.log(uploadedFiles);
+  console.log(filesRef);
 
   return (
     <div
@@ -88,6 +93,7 @@ function FormSectionThird(props: { disable: boolean }) {
             onFileRemove={removeFileHandler}
             file={file}
             onFileUploaded={addUploadedFile}
+            filesRef={filesRef}
           />
         );
       })}

@@ -9,6 +9,7 @@ function SingleFileUploader(props: {
   onFileRemove: (index: string) => void;
   onFileUploaded: (id: string) => void;
   file: File;
+  filesRef: any;
 }) {
   const [uploadStatus, setUploadStatus] = useState(props.uploadStatus);
   const [uploadStarted, setUploadStarted] = useState(false);
@@ -28,6 +29,14 @@ function SingleFileUploader(props: {
           setUploadStatus("failed");
         } else {
           setUploadStatus("uploaded");
+          props.filesRef.current = props.filesRef.current.map(
+            (file: any, index: any) => {
+              if (index === props.identifier) {
+                file.status = "uploaded";
+              }
+              return file;
+            }
+          );
           props.onFileUploaded(res.data.id);
         }
       })
