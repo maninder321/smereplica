@@ -58,7 +58,27 @@ function MainForm() {
         title="Applicant Information"
         stepNumber={2}
       />
-      <FormSectionTwo />
+      <FormSectionTwo
+        formNotCompletedCallback={() => {
+          setCompletionState((prev) => {
+            return {
+              ...prev,
+              sectionOne: "notCompleted",
+              sectionTwo: "idle",
+              sectionThree: "idle",
+              sectionFour: "idle",
+            };
+          });
+        }}
+        formCompletedCallback={() => {
+          setCompletionState((prev) => {
+            return {
+              ...prev,
+              sectionOne: "completed",
+            };
+          });
+        }}
+      />
       <FormStepHeading
         state={completionState.sectionThree}
         title="Upload Documents"
