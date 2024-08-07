@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateSmeDetailsDto } from 'src/dtos/create-sme-details.dto';
 import { SmeDetail } from 'src/entities/sme-details.entity';
 import { Repository } from 'typeorm';
 
@@ -7,15 +8,21 @@ import { Repository } from 'typeorm';
 export class SmeDetailService {
   constructor(
     @InjectRepository(SmeDetail)
-    private smeDetailsService: Repository<SmeDetail>,
+    private smeRepository: Repository<SmeDetail>,
   ) {}
+
+  async create(dto: CreateSmeDetailsDto) {
+    let attachment = await this.smeRepository.create(dto);
+    return this.smeRepository.save(attachment);
+  }
+
   findAll(): Promise<SmeDetail[]> {
-    return this.smeDetailsService.find();
+    return this.smeRepository.find();
   }
   findOne(id: number): Promise<SmeDetail | null> {
-    return this.smeDetailsService.findOneBy({ id });
+    return this.smeRepository.findOneBy({ id });
   }
   async remove(id: number): Promise<void> {
-    await this.smeDetailsService.delete(id);
+    await this.smeRepository.delete(id);
   }
 }

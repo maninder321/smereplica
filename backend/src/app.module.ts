@@ -8,6 +8,7 @@ import { SmeDetail } from './entities/sme-details.entity';
 import { AttachmentService } from './services/attachment.service';
 import { SmeDetailService } from './services/sme-details.service';
 import { FileUploadController } from './controllers/file-upload/file-upload.controller';
+import { SmeController } from './controllers/sme/sme.controller';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { FileUploadController } from './controllers/file-upload/file-upload.cont
     }),
     TypeOrmModule.forFeature([Attachment, SmeDetail]),
   ],
-  controllers: [AppController, FileUploadController],
+  controllers: [AppController, FileUploadController, SmeController],
   providers: [
     AppService,
     FileUploadService,
