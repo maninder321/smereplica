@@ -10,6 +10,7 @@ import HeadingForm from "../FormStepHeading/children/HeadingForm/HeadingForm";
 import FormStepHeading from "../FormStepHeading/FormStepHeading";
 import { Button } from "@mui/material";
 import useMainForm from "./hooks/useMainForm";
+import { ToastContainer, toast } from "react-toastify";
 
 function MainForm() {
   const {
@@ -32,8 +33,6 @@ function MainForm() {
     submitForm,
     isLoading,
   } = useMainForm();
-
-  console.log(formData);
 
   return (
     <div className={styles.mainFormContainer}>

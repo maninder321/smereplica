@@ -1,10 +1,16 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { ToastContainer, toast } from "react-toastify";
 
 function useFormSectionThird(props: {
   formCompletedCallback: (data: any) => void;
   formNotCompletedCallback: () => void;
 }) {
+  const onDropRejected = (rejectedFiles: any) => {
+    console.log(rejectedFiles[0].errors[0].message);
+    console.log(toast.error(rejectedFiles[0].errors[0].message));
+  };
+
   const onDrop = useCallback((acceptedFiles: any) => {
     acceptedFiles = acceptedFiles.map((file: any) => {
       file.status = "uploading";
@@ -16,9 +22,13 @@ function useFormSectionThird(props: {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDropRejected,
     onDrop,
     accept: {
       "application/pdf": [],
+    },
+    onError: () => {
+      console.log("hieoo");
     },
     maxFiles: 6,
   });
