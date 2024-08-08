@@ -88,7 +88,7 @@ function FormSectionThird(props: {
       {files.map((file: any, index) => {
         return (
           <SingleFileUploader
-            key={index}
+            key={file.name}
             identifier={index + ""}
             fileName={file.name}
             uploadStatus={file.status}
