@@ -9,18 +9,24 @@ import { AttachmentService } from './services/attachment.service';
 import { SmeDetailService } from './services/sme-details.service';
 import { FileUploadController } from './controllers/file-upload/file-upload.controller';
 import { SmeController } from './controllers/sme/sme.controller';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '172.23.0.2',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'smereplica',
-      entities: [Attachment, SmeDetail],
-      synchronize: true,
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get('DB_HOST'),
+        port: +configService.get('DB_PORT'),
+        username: configService.get('DB_USERNAME'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_DATABASE'),
+        entities: [Attachment, SmeDetail],
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([Attachment, SmeDetail]),
   ],
