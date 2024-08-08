@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import React, { useCallback, useRef, useState } from "react";
 
 type MainFormCompletion = {
@@ -9,6 +10,7 @@ type MainFormCompletion = {
 };
 
 function useMainForm() {
+  const router = useRouter();
   const [sectionOne, setSectionOne] =
     useState<MainFormCompletion["sectionOne"]>("notCompleted");
   const [sectionTwo, setSectionTwo] =
@@ -49,6 +51,8 @@ function useMainForm() {
     sectionFour: false,
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const formCompletionStatusRef = useRef(formCompletionStatus);
 
   const activateNextStep = useCallback(() => {
@@ -71,17 +75,31 @@ function useMainForm() {
     }
   }, [formCompletionStatusRef]);
 
-  const submitForm = useCallback((data: any) => {
-    fetch("http://localhost:3000/sme/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res));
-  }, []);
+  const submitForm = useCallback(
+    (data: any) => {
+      if (isLoading) {
+        return;
+      }
+      setIsLoading(true);
+      fetch("http://localhost:3000/sme/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          setIsLoading(false);
+          router.push("/result");
+        })
+        .catch(() => {
+          setIsLoading(false);
+        });
+    },
+    [isLoading]
+  );
 
   return {
     sectionOne,
@@ -101,6 +119,7 @@ function useMainForm() {
     formData,
     setFormData,
     submitForm,
+    isLoading,
   };
 }
 

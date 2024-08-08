@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./formSectionFour.module.css";
 import { Button, Checkbox } from "@mui/material";
+import SpinnerLoader from "@/components/SpinnerLoader/SpinnerLoader";
 
 function FormSectionFour(props: {
   disable: boolean;
   activateSubmit: boolean;
+  loading: boolean;
   onSubmitClick: () => void;
   formCompletedCallback: () => void;
   formNotCompletedCallback: () => void;
@@ -75,8 +77,24 @@ function FormSectionFour(props: {
           onClick={props.onSubmitClick}
           variant="contained"
           disabled={props.activateSubmit ? false : true}
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
         >
           Submit
+          {props.loading && (
+            <span
+              style={{
+                marginLeft: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <SpinnerLoader size="20px" color="white" />
+            </span>
+          )}
         </Button>
       </div>
     </div>

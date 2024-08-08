@@ -30,6 +30,7 @@ function MainForm() {
     formData,
     setFormData,
     submitForm,
+    isLoading,
   } = useMainForm();
 
   console.log(formData);
@@ -170,6 +171,7 @@ function MainForm() {
         stepNumber={4}
       />
       <FormSectionFour
+        loading={isLoading}
         onSubmitClick={() => submitForm(formData)}
         activateSubmit={submit === "active" ? true : false}
         disable={sectionFour === "idle" ? true : false}
