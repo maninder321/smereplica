@@ -1,5 +1,6 @@
 .container {
-  color: RGBA(0, 0, 0, 0.6);
+  /* color: RGBA(0, 0, 0, 0.6); */
+  color: #101059;
   display: flex;
   flex-wrap: wrap;
   width: calc(95% - 44px);
@@ -39,4 +40,8 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
+}
+
+.disabled {
+  color: RGBA(0, 0, 0, 0.6);
 }

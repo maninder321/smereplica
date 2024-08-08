@@ -2,11 +2,27 @@ import React from "react";
 import styles from "./formSectionFour.module.css";
 import { Button, Checkbox } from "@mui/material";
 
-function FormSectionFour() {
+function FormSectionFour(props: {
+  disable: boolean;
+  activateSubmit: boolean;
+  formCompletedCallback: () => void;
+  formNotCompletedCallback: () => void;
+}) {
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container + ` ${props.disable ? styles.disabled : ""}`}
+    >
       <div className={styles.termsCheck}>
-        <Checkbox />
+        <Checkbox
+          disabled={props.disable}
+          onClick={(e: any) => {
+            if (e.target.checked) {
+              props.formCompletedCallback();
+            } else {
+              props.formNotCompletedCallback();
+            }
+          }}
+        />
         By ticking, you are confirming that you have understood and are agreeing
         to the details mentioned:
       </div>
@@ -54,7 +70,10 @@ function FormSectionFour() {
         </div>
       </div>
       <div className={styles.submitButton}>
-        <Button variant="contained" disabled>
+        <Button
+          variant="contained"
+          disabled={props.activateSubmit ? false : true}
+        >
           Submit
         </Button>
       </div>

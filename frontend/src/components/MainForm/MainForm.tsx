@@ -25,6 +25,8 @@ function MainForm() {
     setFormCompletionStatus,
     activateNextStep,
     formCompletionStatusRef,
+    submit,
+    setSubmit,
   } = useMainForm();
 
   return (
@@ -41,6 +43,7 @@ function MainForm() {
             setSectionTwo("idle");
             setSectionThree("idle");
             setSectionFour("idle");
+            setSubmit("notActive");
           }
           setFormCompletionStatus((prev) => {
             return {
@@ -74,6 +77,7 @@ function MainForm() {
             setSectionTwo("notCompleted");
             setSectionThree("idle");
             setSectionFour("idle");
+            setSubmit("notActive");
           }
           setFormCompletionStatus((prev) => {
             return {
@@ -103,7 +107,6 @@ function MainForm() {
       />
       <FormSectionThird
         formCompletedCallback={() => {
-          console.log("Third Form Completed");
           setFormCompletionStatus((prev) => {
             return {
               ...prev,
@@ -115,12 +118,12 @@ function MainForm() {
           activateNextStep();
         }}
         formNotCompletedCallback={() => {
-          console.log("Third Form Not Completed");
           if (formCompletionStatus.sectionThree) {
             setSectionOne("completed");
             setSectionTwo("completed");
             setSectionThree("notCompleted");
             setSectionFour("idle");
+            setSubmit("notActive");
           }
           setFormCompletionStatus((prev) => {
             return {
@@ -143,7 +146,37 @@ function MainForm() {
         title="Terms & Conditions"
         stepNumber={4}
       />
-      <FormSectionFour />
+      <FormSectionFour
+        activateSubmit={submit === "active" ? true : false}
+        disable={sectionFour === "idle" ? true : false}
+        formCompletedCallback={() => {
+          setFormCompletionStatus((prev) => {
+            return {
+              ...prev,
+              sectionFour: true,
+            };
+          });
+          // setSectionThree("notCompleted");
+          formCompletionStatusRef.current.sectionFour = true;
+          activateNextStep();
+        }}
+        formNotCompletedCallback={() => {
+          if (formCompletionStatus.sectionFour) {
+            setSectionOne("completed");
+            setSectionTwo("completed");
+            setSectionThree("completed");
+            setSectionFour("notCompleted");
+            setSubmit("notActive");
+          }
+          setFormCompletionStatus((prev) => {
+            return {
+              ...prev,
+              sectionFour: false,
+            };
+          });
+          formCompletionStatusRef.current.sectionFour = false;
+        }}
+      />
     </div>
   );
 }

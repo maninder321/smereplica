@@ -25,8 +25,6 @@ function FormSectionThird(props: {
     formNotCompletedCallback: props.formNotCompletedCallback,
   });
 
-  console.log(filesRef);
-
   return (
     <div
       className={

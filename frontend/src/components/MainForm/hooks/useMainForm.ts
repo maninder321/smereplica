@@ -5,6 +5,7 @@ type MainFormCompletion = {
   sectionTwo: "notCompleted" | "completed" | "idle";
   sectionThree: "notCompleted" | "completed" | "idle";
   sectionFour: "notCompleted" | "completed" | "idle";
+  submit: "active" | "notActive";
 };
 
 function useMainForm() {
@@ -16,6 +17,8 @@ function useMainForm() {
     useState<MainFormCompletion["sectionThree"]>("idle");
   const [sectionFour, setSectionFour] =
     useState<MainFormCompletion["sectionFour"]>("idle");
+  const [submit, setSubmit] =
+    useState<MainFormCompletion["submit"]>("notActive");
 
   const [formCompletionStatus, setFormCompletionStatus] = useState<{
     sectionOne: boolean;
@@ -47,6 +50,7 @@ function useMainForm() {
     }
     if (formCompletionStatusRef.current.sectionFour) {
       setSectionFour("completed");
+      setSubmit("active");
     }
   }, [formCompletionStatusRef]);
 
@@ -55,6 +59,8 @@ function useMainForm() {
     sectionTwo,
     sectionThree,
     sectionFour,
+    submit,
+    setSubmit,
     setSectionOne,
     setSectionTwo,
     setSectionThree,
