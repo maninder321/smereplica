@@ -1,10 +1,21 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { CreateSmeDetailsDto } from 'src/dtos/create-sme-details.dto';
 import { SmeDetailService } from 'src/services/sme-details.service';
+import { SmeValidator } from 'src/validator/sme.validator';
 
 @Controller('sme')
 export class SmeController {
-  constructor(private readonly smeDetailsService: SmeDetailService) {}
+  constructor(
+    private readonly smeDetailsService: SmeDetailService,
+    private readonly smeValidator: SmeValidator,
+  ) {}
 
   @Post('submit')
   submitForm(@Req() req) {
@@ -19,7 +30,8 @@ export class SmeController {
       createdAt: new Date(),
       phoneNumber: input.phoneNumber,
     };
-    console.log(createSmeDetailsDto);
+    this.smeValidator.validateCreateSme(createSmeDetailsDto);
+
     return this.smeDetailsService.create(createSmeDetailsDto);
   }
 

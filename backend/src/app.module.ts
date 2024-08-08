@@ -10,6 +10,7 @@ import { SmeDetailService } from './services/sme-details.service';
 import { FileUploadController } from './controllers/file-upload/file-upload.controller';
 import { SmeController } from './controllers/sme/sme.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SmeValidator } from './validator/sme.validator';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     FileUploadService,
     AttachmentService,
     SmeDetailService,
+    SmeValidator,
   ],
 })
 export class AppModule {}
