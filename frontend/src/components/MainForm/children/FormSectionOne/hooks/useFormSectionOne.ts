@@ -65,7 +65,7 @@ function useFormSectionOne({
 
   const validateCompanyName = useCallback(
     (input: string) => {
-      const regex = /^[A-Za-z]{2,}$/;
+      const regex = /^[A-Za-z0-9 ]{2,}$/;
       if (regex.test(input)) {
         setCompanyName((prev) => {
           return {

@@ -87,7 +87,7 @@ function useFormSectionTwo({
 
   const validateFullName = useCallback(
     (input: string) => {
-      const regex = /^[A-Za-z0-9]{2,}$/;
+      const regex = /^[A-Za-z0-9 ]{2,}$/;
       if (regex.test(input)) {
         setFullName((prev) => {
           return {
@@ -109,7 +109,7 @@ function useFormSectionTwo({
 
   const validatePositionWithCompany = useCallback(
     (input: string) => {
-      const regex = /^[A-Za-z0-9]{2,}$/;
+      const regex = /^[A-Za-z0-9 ]{2,}$/;
       if (regex.test(input)) {
         setPositionWithCompany((prev) => {
           return {
