@@ -7,7 +7,7 @@ function SingleFileUploader(props: {
   identifier: string;
   uploadStatus: "uploading" | "uploaded" | "failed";
   onFileRemove: (index: string) => void;
-  onFileUploaded: (id: string) => void;
+  onFileUploaded: (id: string, index: string) => void;
   file: File;
   filesRef: any;
 }) {
@@ -37,7 +37,7 @@ function SingleFileUploader(props: {
               return file;
             }
           );
-          props.onFileUploaded(res.data.id);
+          props.onFileUploaded(res.data.id, props.identifier);
         }
       })
       .catch(() => {

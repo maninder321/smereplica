@@ -7,10 +7,12 @@ import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <>
       <Header />
-      <MainForm />
+      <main className={styles.main}>
+        <MainForm />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

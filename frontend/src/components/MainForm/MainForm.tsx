@@ -101,7 +101,43 @@ function MainForm() {
         title="Upload Documents"
         stepNumber={3}
       />
-      <FormSectionThird disable={sectionThree === "idle" ? true : false} />
+      <FormSectionThird
+        formCompletedCallback={() => {
+          console.log("Third Form Completed");
+          setFormCompletionStatus((prev) => {
+            return {
+              ...prev,
+              sectionThree: true,
+            };
+          });
+          // setSectionThree("notCompleted");
+          formCompletionStatusRef.current.sectionThree = true;
+          activateNextStep();
+        }}
+        formNotCompletedCallback={() => {
+          console.log("Third Form Not Completed");
+          if (formCompletionStatus.sectionThree) {
+            setSectionOne("completed");
+            setSectionTwo("completed");
+            setSectionThree("notCompleted");
+            setSectionFour("idle");
+          }
+          setFormCompletionStatus((prev) => {
+            return {
+              ...prev,
+              sectionThree: false,
+            };
+          });
+          formCompletionStatusRef.current.sectionThree = false;
+        }}
+        disable={
+          sectionThree === "idle"
+            ? true
+            : sectionThree === "completed"
+            ? true
+            : false
+        }
+      />
       <FormStepHeading
         state={sectionFour}
         title="Terms & Conditions"

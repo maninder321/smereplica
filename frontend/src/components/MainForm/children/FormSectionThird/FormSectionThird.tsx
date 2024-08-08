@@ -20,7 +20,10 @@ function FormSectionThird(props: {
     uploadedFiles,
     addUploadedFile,
     filesRef,
-  } = useFormSectionThird();
+  } = useFormSectionThird({
+    formCompletedCallback: props.formCompletedCallback,
+    formNotCompletedCallback: props.formNotCompletedCallback,
+  });
 
   console.log(filesRef);
 

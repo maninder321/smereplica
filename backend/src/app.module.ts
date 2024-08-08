@@ -14,7 +14,7 @@ import { SmeController } from './controllers/sme/sme.controller';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '172.23.0.3',
+      host: '172.23.0.2',
       port: 3306,
       username: 'root',
       password: 'root',
