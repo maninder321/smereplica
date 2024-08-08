@@ -80,7 +80,8 @@ function FormSectionThird(props: {
           </span>
           <div>
             In case if you are facing any issue while uploading bank statements,
-            Please contact us on support@credilinq.ai
+            Please contact us on{" "}
+            <span className={styles.email}>support@credilinq.ai</span>
           </div>
         </div>
       </div>

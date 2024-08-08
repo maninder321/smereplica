@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./formSectionFour.module.css";
 import { Button, Checkbox } from "@mui/material";
 import SpinnerLoader from "@/components/SpinnerLoader/SpinnerLoader";
+import Link from "next/link";
 
 function FormSectionFour(props: {
   disable: boolean;
@@ -69,7 +70,23 @@ function FormSectionFour(props: {
           <span>
             <i className="fa-solid fa-check"></i>
           </span>
-          <div>I have read and understand the Terms & Conditions</div>
+          <div>
+            I have read and understand the{" "}
+            <span className={styles.termsAndCondition}>
+              <Link
+                href={
+                  "https://smehealthcheck.credilinq.ai/terms-and-conditions"
+                }
+                target="_blank"
+                style={{
+                  textDecoration: "none",
+                  color: "#601a79",
+                }}
+              >
+                Terms & Conditions
+              </Link>
+            </span>
+          </div>
         </div>
       </div>
       <div className={styles.submitButton}>

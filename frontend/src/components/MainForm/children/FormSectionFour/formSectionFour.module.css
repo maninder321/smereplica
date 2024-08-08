@@ -45,3 +45,8 @@
 .disabled {
   color: RGBA(0, 0, 0, 0.6);
 }
+
+.termsAndCondition {
+  text-decoration: none;
+  color: #601a79 !important;
+}

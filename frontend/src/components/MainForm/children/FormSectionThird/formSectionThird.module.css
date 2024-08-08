@@ -74,3 +74,7 @@
 .singleInformation > span {
   padding-right: 10px;
 }
+
+.email {
+  color: #601a79;
+}
