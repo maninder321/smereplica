@@ -18,10 +18,13 @@ function SingleFileUploader(props: {
   const handleFileUpload = useCallback(async () => {
     const formData = new FormData();
     formData.append("file", props.file);
-    const data = await fetch("http://localhost:3000/file-upload/upload", {
-      method: "POST",
-      body: formData,
-    })
+    const data = await fetch(
+      process.env.NEXT_PUBLIC_API_HOST + "/file-upload/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         console.log(res);

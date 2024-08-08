@@ -81,7 +81,7 @@ function useMainForm() {
         return;
       }
       setIsLoading(true);
-      fetch("http://localhost:3000/sme/submit", {
+      fetch(process.env.NEXT_PUBLIC_API_HOST + "/sme/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

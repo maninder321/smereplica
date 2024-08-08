@@ -17,7 +17,7 @@ const columns: GridColDef[] = [
 
 export default function TableView() {
   React.useEffect(() => {
-    fetch("http://localhost:3000/sme/getAll")
+    fetch(process.env.NEXT_PUBLIC_API_HOST + "/sme/getAll")
       .then((res) => res.json())
       .then((res) => {
         let data = res.data.map((data) => {
