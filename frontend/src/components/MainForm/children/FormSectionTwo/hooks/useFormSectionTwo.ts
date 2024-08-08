@@ -5,7 +5,7 @@ function useFormSectionTwo({
   formCompletedCallback,
   formNotCompletedCallback,
 }: {
-  formCompletedCallback: () => void;
+  formCompletedCallback: (data: any) => void;
   formNotCompletedCallback: () => void;
 }) {
   const [fullName, setFullName] = useState<FormElementType>({
@@ -49,6 +49,11 @@ function useFormSectionTwo({
     emailAddress.completed,
     reEnterEmailAddress.completed,
     mobileNumber.completed,
+    fullName.data,
+    positionWithCompany.data,
+    emailAddress.data,
+    reEnterEmailAddress.data,
+    mobileNumber.data,
   ]);
 
   useEffect(() => {
@@ -63,7 +68,12 @@ function useFormSectionTwo({
       reEnterEmailAddress.completed &&
       mobileNumber.completed
     ) {
-      formCompletedCallback();
+      formCompletedCallback({
+        fullName: fullName.data,
+        positionInCompany: positionWithCompany.data,
+        email: emailAddress.data,
+        phoneNumber: mobileNumber.data,
+      });
     } else {
       formNotCompletedCallback();
     }

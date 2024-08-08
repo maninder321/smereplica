@@ -6,7 +6,7 @@ import styles from "./formSectionOne.module.css";
 import useFormSectionOne from "./hooks/useFormSectionOne";
 
 function FormSectionOne(props: {
-  formCompletedCallback: () => void;
+  formCompletedCallback: (data: any) => void;
   formNotCompletedCallback: () => void;
 }) {
   const {

@@ -19,6 +19,23 @@ function useMainForm() {
     useState<MainFormCompletion["sectionFour"]>("idle");
   const [submit, setSubmit] =
     useState<MainFormCompletion["submit"]>("notActive");
+  const [formData, setFormData] = useState<{
+    companyName: string;
+    companyUEN: string;
+    fullName: string;
+    positionInCompany: string;
+    email: string;
+    phoneNumber: string;
+    attachmentIds: number[];
+  }>({
+    companyName: "",
+    companyUEN: "",
+    fullName: "",
+    positionInCompany: "",
+    email: "",
+    phoneNumber: "",
+    attachmentIds: [],
+  });
 
   const [formCompletionStatus, setFormCompletionStatus] = useState<{
     sectionOne: boolean;
@@ -54,6 +71,18 @@ function useMainForm() {
     }
   }, [formCompletionStatusRef]);
 
+  const submitForm = useCallback((data: any) => {
+    fetch("http://localhost:3000/sme/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res));
+  }, []);
+
   return {
     sectionOne,
     sectionTwo,
@@ -69,6 +98,9 @@ function useMainForm() {
     setFormCompletionStatus,
     activateNextStep,
     formCompletionStatusRef,
+    formData,
+    setFormData,
+    submitForm,
   };
 }
 

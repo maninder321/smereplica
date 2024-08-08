@@ -5,7 +5,7 @@ function useFormSectionOne({
   formCompletedCallback,
   formNotCompletedCallback,
 }: {
-  formCompletedCallback: () => void;
+  formCompletedCallback: (data: any) => void;
   formNotCompletedCallback: () => void;
 }) {
   const [companyUEN, setCompanyUEN] = useState<FormElementType>({
@@ -21,11 +21,19 @@ function useFormSectionOne({
 
   useEffect(() => {
     formCompletedHandler();
-  }, [companyUEN.completed, companyName.completed]);
+  }, [
+    companyUEN.completed,
+    companyName.completed,
+    companyName.data,
+    companyUEN.data,
+  ]);
 
   const formCompletedHandler = useCallback(() => {
     if (companyName.completed && companyUEN.completed) {
-      formCompletedCallback();
+      formCompletedCallback({
+        companyName: companyName.data,
+        companyUEN: companyUEN.data,
+      });
     } else {
       formNotCompletedCallback();
     }

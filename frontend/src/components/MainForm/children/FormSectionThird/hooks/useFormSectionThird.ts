@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 function useFormSectionThird(props: {
-  formCompletedCallback: () => void;
+  formCompletedCallback: (data: any) => void;
   formNotCompletedCallback: () => void;
 }) {
   const onDrop = useCallback((acceptedFiles: any) => {
@@ -22,6 +22,8 @@ function useFormSectionThird(props: {
     },
     maxFiles: 6,
   });
+  const [uploadedFiles, setUploadedFiles] = useState<{ id: string }[]>([]);
+  const uploadedFilesRef = useRef(uploadedFiles);
   const [files, setFiles] = useState([]);
   const [filesCount, setFilesCount] = useState(0);
   const filesCountRef = useRef(filesCount);
@@ -33,11 +35,15 @@ function useFormSectionThird(props: {
       props.formNotCompletedCallback();
     }
     if (filesCountRef.current === uploadedFilesCountRef.current) {
-      props.formCompletedCallback();
+      props.formCompletedCallback({
+        attachmentIds: uploadedFilesRef.current.map((file: any) => {
+          return file.id;
+        }),
+      });
     } else {
       props.formNotCompletedCallback();
     }
-  }, []);
+  }, [uploadedFilesRef]);
 
   const removeFileHandler = useCallback(
     (index: string) => {
@@ -51,7 +57,6 @@ function useFormSectionThird(props: {
     [checkAllFilesUploaded]
   );
 
-  const [uploadedFiles, setUploadedFiles] = useState<{ id: string }[]>([]);
   const [uploadedFilesCount, setUploadedFilesCount] = useState(0);
   const uploadedFilesCountRef = useRef(uploadedFilesCount);
 
@@ -65,12 +70,18 @@ function useFormSectionThird(props: {
           },
         ];
       });
+      uploadedFilesRef.current = [
+        ...uploadedFilesRef.current,
+        {
+          id: id,
+        },
+      ];
       setUploadedFilesCount((prev) => prev + 1);
       uploadedFilesCountRef.current = uploadedFilesCountRef.current + 1;
       console.log(filesCountRef.current);
       checkAllFilesUploaded();
     },
-    [checkAllFilesUploaded]
+    [checkAllFilesUploaded, uploadedFilesRef]
   );
 
   return {

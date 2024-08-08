@@ -27,7 +27,12 @@ function MainForm() {
     formCompletionStatusRef,
     submit,
     setSubmit,
+    formData,
+    setFormData,
+    submitForm,
   } = useMainForm();
+
+  console.log(formData);
 
   return (
     <div className={styles.mainFormContainer}>
@@ -53,7 +58,13 @@ function MainForm() {
           });
           formCompletionStatusRef.current.sectionOne = false;
         }}
-        formCompletedCallback={() => {
+        formCompletedCallback={(data: any) => {
+          setFormData((prev) => {
+            return {
+              ...prev,
+              ...data,
+            };
+          });
           setFormCompletionStatus((prev) => {
             return {
               ...prev,
@@ -87,7 +98,13 @@ function MainForm() {
           });
           formCompletionStatusRef.current.sectionTwo = false;
         }}
-        formCompletedCallback={() => {
+        formCompletedCallback={(data: any) => {
+          setFormData((prev) => {
+            return {
+              ...prev,
+              ...data,
+            };
+          });
           setFormCompletionStatus((prev) => {
             return {
               ...prev,
@@ -106,7 +123,13 @@ function MainForm() {
         stepNumber={3}
       />
       <FormSectionThird
-        formCompletedCallback={() => {
+        formCompletedCallback={(data: any) => {
+          setFormData((prev) => {
+            return {
+              ...prev,
+              ...data,
+            };
+          });
           setFormCompletionStatus((prev) => {
             return {
               ...prev,
@@ -147,6 +170,7 @@ function MainForm() {
         stepNumber={4}
       />
       <FormSectionFour
+        onSubmitClick={() => submitForm(formData)}
         activateSubmit={submit === "active" ? true : false}
         disable={sectionFour === "idle" ? true : false}
         formCompletedCallback={() => {

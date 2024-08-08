@@ -6,7 +6,7 @@ import styles from "./formSectionTwo.module.css";
 import useFormSectionTwo from "./hooks/useFormSectionTwo";
 
 function FormSectionTwo(props: {
-  formCompletedCallback: () => void;
+  formCompletedCallback: (data: any) => void;
   formNotCompletedCallback: () => void;
   activate: boolean;
 }) {

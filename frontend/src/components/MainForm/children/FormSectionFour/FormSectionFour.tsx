@@ -5,6 +5,7 @@ import { Button, Checkbox } from "@mui/material";
 function FormSectionFour(props: {
   disable: boolean;
   activateSubmit: boolean;
+  onSubmitClick: () => void;
   formCompletedCallback: () => void;
   formNotCompletedCallback: () => void;
 }) {
@@ -71,6 +72,7 @@ function FormSectionFour(props: {
       </div>
       <div className={styles.submitButton}>
         <Button
+          onClick={props.onSubmitClick}
           variant="contained"
           disabled={props.activateSubmit ? false : true}
         >

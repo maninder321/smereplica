@@ -7,7 +7,7 @@ import useFormSectionThird from "./hooks/useFormSectionThird";
 
 function FormSectionThird(props: {
   disable: boolean;
-  formCompletedCallback: () => void;
+  formCompletedCallback: (data: any) => void;
   formNotCompletedCallback: () => void;
 }) {
   const {
