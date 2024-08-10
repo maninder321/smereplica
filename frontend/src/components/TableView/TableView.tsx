@@ -17,7 +17,13 @@ const columns: GridColDef[] = [
 
 export default function TableView() {
   React.useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_HOST + "/sme/getAll")
+    let token = localStorage.getItem("sme_access_token");
+    fetch(process.env.NEXT_PUBLIC_API_HOST + "/sme/getAll", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         let data = res.data.map((data) => {

@@ -77,6 +77,7 @@ function useMainForm() {
 
   const submitForm = useCallback(
     (data: any) => {
+      let token = localStorage.getItem("sme_access_token");
       if (isLoading) {
         return;
       }
@@ -85,6 +86,7 @@ function useMainForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       })
