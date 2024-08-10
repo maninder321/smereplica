@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./form.module.css";
 import Header from "@/components/Header/Header";
@@ -10,24 +10,35 @@ import MainForm from "@/components/MainForm/MainForm";
 import { NextResponse, NextRequest } from "next/server";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import SpinnerLoader from "@/components/SpinnerLoader/SpinnerLoader";
+import useAuth from "@/hooks/useAuth";
 
 function page() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-
-  const router = useRouter();
-
-  if (!isAuthenticated) {
-    router.push("/");
-    return;
-  }
+  const { isAuthenticated } = useAuth();
 
   return (
     <>
-      <Header />
-      <main className={styles.main}>
-        <MainForm />
-      </main>
-      <Footer />
+      {!isAuthenticated ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100vw",
+            height: "100vh",
+          }}
+        >
+          <h1>Loading.....</h1>
+        </div>
+      ) : (
+        <>
+          <Header />
+          <main className={styles.main}>
+            <MainForm />
+          </main>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

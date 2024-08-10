@@ -48,4 +48,13 @@ export class SmeController {
       data: details,
     };
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/checkAuthenticated')
+  async checkAuthenticated() {
+    return {
+      error: false,
+      message: 'Authenticated',
+    };
+  }
 }
