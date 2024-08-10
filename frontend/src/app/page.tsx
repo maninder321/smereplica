@@ -6,16 +6,13 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Login from "@/components/Login/Login";
 
 export default function Home() {
   return (
     <>
       <ToastContainer />
-      <Header />
-      <main className={styles.main}>
-        <MainForm />
-      </main>
-      <Footer />
+      <Login />
     </>
   );
 }

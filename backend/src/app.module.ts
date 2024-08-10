@@ -11,6 +11,10 @@ import { FileUploadController } from './controllers/file-upload/file-upload.cont
 import { SmeController } from './controllers/sme/sme.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SmeValidator } from './validator/sme.validator';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,6 +34,8 @@ import { SmeValidator } from './validator/sme.validator';
       inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([Attachment, SmeDetail]),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController, FileUploadController, SmeController],
   providers: [
@@ -38,6 +44,7 @@ import { SmeValidator } from './validator/sme.validator';
     AttachmentService,
     SmeDetailService,
     SmeValidator,
+    AuthService,
   ],
 })
 export class AppModule {}
